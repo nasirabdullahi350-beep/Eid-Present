@@ -79,44 +79,64 @@
             createSparkles(rect.left + rect.width/2, rect.top + rect.height/2);
         }
 
-        // Handle Form Submit with Formspree
-        document.getElementById('giftForm').addEventListener('submit', function(e) {
-            // Show loading state
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.classList.add('loading');
-            
-            // Get name for success message
-            const name = document.getElementById('herName').value;
-            document.getElementById('successName').textContent = name;
-            
-            // Let Formspree handle the submission
-            // The form will submit to Formspree, then redirect back or show success
-            
-            // Store name in localStorage to show success message after redirect
-            localStorage.setItem('eidWishSubmitted', 'true');
-            localStorage.setItem('herName', name);
-        });
-
-        // Check if form was just submitted (after redirect back)
-        window.addEventListener('load', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('submitted') === 'true' || localStorage.getItem('eidWishSubmitted') === 'true') {
-                showSuccessMessage(localStorage.getItem('herName'));
-                // Clear the flag
-                localStorage.removeItem('eidWishSubmitted');
+       // Handle Form Submit with AJAX (no redirect)
+document.getElementById('giftForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const submitBtn = document.getElementById('submitBtn');
+    const form = e.target;
+    const name = document.getElementById('herName').value;
+    
+    // Show loading state
+    submitBtn.classList.add('loading');
+    
+    // Collect form data
+    const formData = new FormData(form);
+    
+    try {
+        // Send to Formspree
+        const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
             }
         });
+        
+        if (response.ok) {
+            // SUCCESS - Show animations immediately
+            showSuccessMessage(name);
+            
+            // Reset form
+            form.reset();
+            document.querySelectorAll('.gift-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+        } else {
+            alert('Oops! Something went wrong. Please try again.');
+        }
+    } catch (error) {
+        alert('Connection error. Please check your internet and try again.');
+    } finally {
+        submitBtn.classList.remove('loading');
+    }
+});
 
-        function showSuccessMessage(name) {
-            const formContainer = document.getElementById('giftFormContainer');
-            const successMessage = document.getElementById('successMessage');
-            
-            if (name) {
-                document.getElementById('successName').textContent = name;
-            }
-            
-            formContainer.style.display = 'none';
-            successMessage.style.display = 'block';
+function showSuccessMessage(name) {
+    const formContainer = document.getElementById('giftFormContainer');
+    const successMessage = document.getElementById('successMessage');
+    
+    document.getElementById('successName').textContent = name;
+    
+    // Animate transition
+    formContainer.style.opacity = '0';
+    formContainer.style.transform = 'scale(0.9)';
+    formContainer.style.transition = 'all 0.5s ease';
+    
+    setTimeout(() => {
+        formContainer.style.display = 'none';
+        successMessage.style.display = 'block';
+
             
             // Celebration sparkles
             for (let i = 0; i < 50; i++) {
