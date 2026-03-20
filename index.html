@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Mubarak, My Love</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated Stars Background -->
+    <div class="stars" id="stars"></div>
+    
+    <!-- Floating Hearts -->
+    <div class="hearts-container" id="hearts"></div>
+    
+    <!-- Floating Lanterns -->
+    <div class="lanterns" id="lanterns"></div>
+    
+    <!-- Crescent Moon -->
+    <div class="moon-container">
+        <div class="moon"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="card">
+            <h1>Eid Mubarak</h1>
+            <div class="subtitle">My Dearest Love</div>
+            
+            <div class="divider"></div>
+            
+            <div class="message">
+                <p>On this blessed day of celebration,</p>
+                <p>My heart is filled with gratitude for having you in my life.</p>
+                <p>May this Eid bring you endless joy, peace, and love.</p>
+                <p>You are my moon, my stars, and my everything.</p>
+            </div>
+            
+            <div class="button-group">
+                <button class="surprise-btn" onclick="revealNote(event)">
+                    Open My Heart ♥
+                </button>
+            </div>
+            
+            <div class="love-note" id="loveNote">
+                <div class="love-note-content">
+                    Every moment with you feels like a blessing from above. 
+                    This Eid, I pray that our love continues to grow stronger, 
+                    that every day brings us closer, and that we create countless 
+                    beautiful memories together. You make my world brighter, 
+                    my heart fuller, and my life complete. 
+                    Eid Mubarak, my love. Forever yours.
+                </div>
+            </div>
+        </div>
+
+        <!-- Gift Section -->
+        <div class="gift-section" id="giftSection">
+            <div class="gift-form-container" id="giftFormContainer">
+                <div class="gift-title">What is Your Eid Wish?</div>
+                <div class="gift-subtitle">Tell me what would make your heart smile this Eid ✨</div>
+                
+                <!-- FORMSPREE FORM - Replace YOUR_FORM_ID with your actual Formspree form ID -->
+                <form class="gift-form" id="giftForm" 
+                      action="https://formspree.io/f/mvzwlglg" 
+                      method="POST">
+                    
+                    <!-- Hidden fields for email configuration -->
+                    <input type="hidden" name="_subject" value="🌙 Eid Gift Wish from Your Girlfriend!">
+                    <input type="hidden" name="_template" value="table">
+                    
+                    <div class="input-group">
+                        <label for="herName">Your Beautiful Name</label>
+                        <input type="text" id="herName" name="herName" placeholder="Enter your name..." required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>What type of gift speaks to your heart?</label>
+                        <div class="gift-options">
+                            <label class="gift-option" onclick="selectGift(this, 'jewelry')">
+                                <input type="radio" name="giftType" value="Jewelry" required>
+                                <span class="gift-icon">💎</span>
+                                <span class="gift-label">Jewelry</span>
+                            </label>
+                            <label class="gift-option" onclick="selectGift(this, 'experience')">
+                                <input type="radio" name="giftType" value="Experience">
+                                <span class="gift-icon">✈️</span>
+                                <span class="gift-label">Experience</span>
+                            </label>
+                            <label class="gift-option" onclick="selectGift(this, 'flowers')">
+                                <input type="radio" name="giftType" value="Flowers">
+                                <span class="gift-icon">🌹</span>
+                                <span class="gift-label">Flowers</span>
+                            </label>
+                            <label class="gift-option" onclick="selectGift(this, 'dinner')">
+                                <input type="radio" name="giftType" value="Romantic Dinner">
+                                <span class="gift-icon">🍽️</span>
+                                <span class="gift-label">Romantic Dinner</span>
+                            </label>
+                            <label class="gift-option" onclick="selectGift(this, 'surprise')">
+                                <input type="radio" name="giftType" value="Surprise Me">
+                                <span class="gift-icon">🎁</span>
+                                <span class="gift-label">Surprise Me</span>
+                            </label>
+                            <label class="gift-option" onclick="selectGift(this, 'other')">
+                                <input type="radio" name="giftType" value="Something Else">
+                                <span class="gift-icon">💭</span>
+                                <span class="gift-label">Something Else</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="giftDetails">Describe your dream gift or any specific wishes</label>
+                        <textarea id="giftDetails" name="giftDetails" placeholder="Tell me more about what you'd love... colors, styles, places you'd like to visit, or anything else that's in your heart 💕"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="urgency">How soon would you like this surprise?</label>
+                        <select id="urgency" name="urgency">
+                            <option value="On Eid Day itself 🌙">On Eid Day itself 🌙</option>
+                            <option value="Within this blessed week">Within this blessed week</option>
+                            <option value="Surprise me with the timing!">Surprise me with the timing!</option>
+                        </select>
+                    </div>
+
+                    <!-- Optional: redirect back to your page after submission -->
+                    <input type="hidden" name="_next" value="https://your-username.github.io/eid-gift?submitted=true">
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        Send My Wish 💌
+                    </button>
+                </form>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                <div class="success-icon">💝</div>
+                <div class="success-text">Wish Sent!</div>
+                <div class="success-subtext">
+                    Your wish has been sent straight to my heart.<br>
+                    I can't wait to make your Eid dreams come true.<br>
+                    <span id="successName"></span>, you deserve the world! 🌟
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
