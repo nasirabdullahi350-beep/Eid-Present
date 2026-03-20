@@ -183,7 +183,7 @@
         /* Typography */
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 5rem;
+            font-size: 10px;
             background: linear-gradient(135deg, #ffd700 0%, #ff69b4 50%, #ffd700 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
